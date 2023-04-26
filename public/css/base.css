@@ -1,0 +1,115 @@
+*,
+:before,
+::after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+.icon-nav {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.icon-nav svg {
+  margin-right: 5px;
+  position: relative;
+  top: -1px;
+}
+
+.product-name {
+  list-style: lower-latin;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 17px;
+}
+
+.product-image img {
+  max-width: 100px;
+  display: block;
+}
+
+.product-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-action button {
+  padding: 5px;
+  margin: 0px;
+  line-height: 1;
+  border: none;
+  border-radius: 3px;
+}
+.product-action button:not(:first-child) {
+  margin-left: 5px;
+}
+.product-action button.btn-remove {
+  color: #fff;
+  background: #dc3545;
+  border: 1px solid #dc3545;
+}
+.product-action button.btn-remove:hover, .product-action button.btn-remove:focus {
+  background-color: #bb2d3b;
+  border-color: #b02a37;
+}
+.product-action button.btn-remove:focus {
+  box-shadow: 0 0 0 0.25rem rgba(225, 83, 97, 0.5);
+}
+.product-action button.btn-edit {
+  color: #fff;
+  background-color: #198754;
+  border: 1px solid #198754;
+}
+
+.card-header h4 {
+  font-weight: 500;
+  margin: 0px;
+}
+
+#form-search {
+  position: relative;
+  min-width: 320px;
+}
+#form-search .input-search {
+  width: 100%;
+}
+#form-search .input-search input {
+  border-radius: 3px;
+  width: 100%;
+}
+#form-search .btn-search {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  z-index: 9;
+  border: none;
+  border-radius: 3px;
+  width: 50px;
+  height: calc(100% - 2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product_image_view .main-view {
+  border: 1px solid #bebebe;
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.product_image_view img {
+  max-width: 200px;
+}
+
+h3.product_name {
+  font-size: 15px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+.form-switch.status {
+  padding-left: 0px;
+}
+.form-switch.status .status_input {
+  padding-left: 2.5rem;
+}/*# sourceMappingURL=base.css.map */

@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\ConfigController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('product')->name('product.')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::post('/create', [ProductController::class, 'create'])->name('create');
+        Route::put('/all-status', [ProductController::class, 'allStatus'])->name('allStatus');
+        Route::put('/{id}/status', [ProductController::class, 'status'])->name('status');
+        Route::put('/{id}/update', [ProductController::class, 'update'])->name('update')->where('id', '[0-9]+');
+    });
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+    });
+    Route::prefix('config')->name('config.')->group(function () {
+        Route::get('/', [ConfigController::class, 'index'])->name('index');
+        Route::put('/update', [ConfigController::class, 'update'])->name('update');
+    });
+});
