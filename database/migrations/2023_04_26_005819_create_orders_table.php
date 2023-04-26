@@ -15,6 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('payment_id');
+            $table->unsignedBigInteger('order_status_id');
             $table->string('token_id');
             $table->string('user_name')->nullable();
             $table->string('phone_number')->nullable();
@@ -22,9 +24,6 @@ class CreateOrdersTable extends Migration
             $table->smallInteger('status_payment')->default(0);
             $table->softDeletes();
             $table->timestamps();
-            //foreign key
-            $table->unsignedBigInteger('payment_id');
-            $table->unsignedBigInteger('order_status_id');
             $table->foreign('payment_id')->references('id')->on('payment');
             $table->foreign('order_status_id')->references('id')->on('order_status');
         });

@@ -20,19 +20,36 @@ class OrderController extends Controller
     public function delete(Request $request, $id = 0)
     {
         $order = Order::find($id);
-
         if (!empty($order)) {
             DB::beginTransaction();
             try {
                 $orderDetail = OrderDetail::whereOrderId($id)->get();
-                foreach ($orderDetail as $key => $value) {
-                    # code...
+                if (!empty($orderDetail)) {
+                    foreach ($orderDetail as $key => $value) {
+                        $value->delete();
+                    }
                 }
-                dd($orderDetail);
-                die;
+                $order->delete();
+                DB::commit();
+                return redirect()->route('admin.order.index')->with('success', 'Deleted order success !!!');
             } catch (\Throwable $th) {
                 DB::rollBack();
+                return redirect()->route('admin.order.index')->with('fail', 'Can not delete order !!!');
             }
         }
+        return redirect()->route('admin.order.index')->with('fail', 'Can not delete order !!!');
+    }
+    public function status(Request $request)
+    {
+        $status = $request->status;
+        $ids = $request->ids;
+        if (!empty($ids)) {
+            foreach ($ids as $key => $id) {
+                $order = Order::find($id);
+                $order->order_status_id = $status;
+                $order->save();
+            }
+        }
+        return response(true, 200);
     }
 }

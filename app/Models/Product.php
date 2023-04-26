@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'product';
+    protected $appends = array('thumbnail');
     protected $fillable = [
         'name',
         'desc',
@@ -17,4 +18,8 @@ class Product extends Model
         'status',
         'user_id'
     ];
+    public function getThumbnailAttribute()
+    {
+        return asset('uploads/product/'.$this->image);
+    }
 }

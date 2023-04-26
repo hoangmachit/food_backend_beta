@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Payment;
 use App\Models\OrderDetail;
 use App\Models\OrderStatus;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table = 'order';
     protected $fillable = [
         'token_id',

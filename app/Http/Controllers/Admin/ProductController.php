@@ -21,11 +21,11 @@ class ProductController extends Controller
             'products' => $products
         ]);
     }
-    public  function create(Request $request)
+    public function create(Request $request)
     {
         $data = $request->product;
         $data['user_id'] = Auth::user()->id;
-        $data['status']  = !empty($data['status']) ? (int)$data['status'] : 0;
+        $data['status'] = !empty($data['status']) ? (int) $data['status'] : 0;
         $product = Product::create($data);
         if ($request->image) {
             $imageName = $product->id . '.' . $request->image->extension();
@@ -35,10 +35,10 @@ class ProductController extends Controller
         }
         return redirect()->route('admin.product.index')->with('success', 'Product create success !!!');
     }
-    public  function update(Request $request, $id = 0)
+    public function update(Request $request, $id = 0)
     {
         $data = $request->product;
-        $data['status']  = !empty($data['status']) ? (int)$data['status'] : 0;
+        $data['status'] = !empty($data['status']) ? (int) $data['status'] : 0;
         $data['user_id'] = Auth::user()->id;
         $product = Product::find($id);
         $product->name = $data['name'];
@@ -74,9 +74,19 @@ class ProductController extends Controller
     public function status(Request $request, $id = 0)
     {
         $product = Product::find($id);
-        $status  = $request->status;
+        $status = $request->status;
         $product->status = $status;
         $product->save();
         return response(true, 200);
+    }
+    public function delete(Request $request, $id = 0)
+    {
+        $product = Product::find($id);
+        if (!empty($product)) {
+            $product->delete();
+            return redirect()->route('admin.product.index')->with('success', 'Deleted product success !!!');
+        } else {
+            return redirect()->route('admin.product.index')->with('fail', 'Can not delete product success !!!');
+        }
     }
 }

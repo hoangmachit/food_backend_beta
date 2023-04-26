@@ -31,10 +31,12 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::put('/all-status', [ProductController::class, 'allStatus'])->name('allStatus');
         Route::put('/{id}/status', [ProductController::class, 'status'])->name('status');
         Route::put('/{id}/update', [ProductController::class, 'update'])->name('update')->where('id', '[0-9]+');
+        Route::delete('/{id}/delete', [ProductController::class, 'delete'])->name('delete')->where('id', '[0-9]+');
     });
     Route::prefix('order')->name('order.')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::delete('/{id}/delete', [OrderController::class, 'delete'])->name('delete')->where('id', '[0-9]+');
+        Route::put('/status', [OrderController::class, 'status'])->name('status');
     });
     Route::prefix('config')->name('config.')->group(function () {
         Route::get('/', [ConfigController::class, 'index'])->name('index');
