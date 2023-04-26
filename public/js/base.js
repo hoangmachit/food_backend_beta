@@ -33,3 +33,10 @@ $('.input-product-status').on('change', function (e) {
         console.log(result);
     });
 });
+const rootDeleteOrder = $('#modalDeleteOrder');
+$('.btn-remove-order').on('click', function (e) {
+    e.preventDefault();
+    const action = $(this).data('action');
+    rootDeleteOrder.find('form').attr('action', action);
+    rootDeleteOrder.modal('show');
+});

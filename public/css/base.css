@@ -28,34 +28,46 @@
   display: block;
 }
 
-.product-action {
+.product-action,
+.order-action {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.product-action button {
+.product-action button,
+.order-action button {
   padding: 5px;
   margin: 0px;
   line-height: 1;
   border: none;
   border-radius: 3px;
 }
-.product-action button:not(:first-child) {
+.product-action button:not(:first-child),
+.order-action button:not(:first-child) {
   margin-left: 5px;
 }
-.product-action button.btn-remove {
+.product-action button.btn-remove, .product-action button.btn-remove-order,
+.order-action button.btn-remove,
+.order-action button.btn-remove-order {
   color: #fff;
   background: #dc3545;
   border: 1px solid #dc3545;
 }
-.product-action button.btn-remove:hover, .product-action button.btn-remove:focus {
+.product-action button.btn-remove:hover, .product-action button.btn-remove:focus, .product-action button.btn-remove-order:hover, .product-action button.btn-remove-order:focus,
+.order-action button.btn-remove:hover,
+.order-action button.btn-remove:focus,
+.order-action button.btn-remove-order:hover,
+.order-action button.btn-remove-order:focus {
   background-color: #bb2d3b;
   border-color: #b02a37;
 }
-.product-action button.btn-remove:focus {
+.product-action button.btn-remove:focus, .product-action button.btn-remove-order:focus,
+.order-action button.btn-remove:focus,
+.order-action button.btn-remove-order:focus {
   box-shadow: 0 0 0 0.25rem rgba(225, 83, 97, 0.5);
 }
-.product-action button.btn-edit {
+.product-action button.btn-edit,
+.order-action button.btn-edit {
   color: #fff;
   background-color: #198754;
   border: 1px solid #198754;

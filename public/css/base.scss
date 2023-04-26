@@ -31,7 +31,8 @@
     }
 }
 
-.product-action {
+.product-action,
+.order-action {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,7 +48,7 @@
             margin-left: 5px;
         }
 
-        &.btn-remove {
+        &.btn-remove, &.btn-remove-order {
             color: #fff;
             background: #dc3545;
             border: 1px solid #dc3545;

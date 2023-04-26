@@ -34,6 +34,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
     Route::prefix('order')->name('order.')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::delete('/{id}/delete', [OrderController::class, 'delete'])->name('delete')->where('id', '[0-9]+');
     });
     Route::prefix('config')->name('config.')->group(function () {
         Route::get('/', [ConfigController::class, 'index'])->name('index');

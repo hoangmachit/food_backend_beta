@@ -15,12 +15,8 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_detail', function (Blueprint $table) {
             $table->id();
-            $table->string('namevi', 255)->nullable();
-            $table->string('nameen', 255)->nullable();
-            $table->string('nameja', 255)->nullable();
-            $table->string('descvi', 255)->nullable();
-            $table->string('descen', 255)->nullable();
-            $table->string('descja', 255)->nullable();
+            $table->string('name', 255)->nullable();
+            $table->string('desc', 255)->nullable();
             $table->string('image', 255)->nullable();
             $table->double('price', 12, 2)->default(0);
             $table->integer('quantity')->default(1);
