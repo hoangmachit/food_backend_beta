@@ -50,20 +50,19 @@ class OrderSeeder extends Seeder
                 'payment_id' => 1
             ]
         ];
-        foreach ($orders as $key => $order) {
-            $orderId = DB::table('order')->insertGetId($order);
-            if ($orderId) {
-                $product = Product::find($orderId);
-                DB::table('order_detail')->insert([
-                    'order_id'=> $orderId,
-                    'name' => $product->name,
-                    'desc' => $product->desc,
-                    'image' => $product->image,
-                    'price' => $product->price,
-                    'quantity' => 1,
-                ]);
-            }
-        };
-        die;
+        // foreach ($orders as $key => $order) {
+        //     $orderId = DB::table('order')->insertGetId($order);
+        //     if ($orderId) {
+        //         $product = Product::find($orderId);
+        //         DB::table('order_detail')->insert([
+        //             'order_id'=> $orderId,
+        //             'name' => $product->name,
+        //             'desc' => $product->desc,
+        //             'image' => $product->image,
+        //             'price' => $product->price,
+        //             'quantity' => 1,
+        //         ]);
+        //     }
+        // };
     }
 }

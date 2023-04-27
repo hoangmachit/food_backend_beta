@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $orders = Order::with('payment', 'order_status', 'order_detail')->get();

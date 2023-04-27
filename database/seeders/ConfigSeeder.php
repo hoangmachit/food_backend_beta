@@ -57,5 +57,23 @@ class ConfigSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        DB::table('config')->insert([
+            'name' => 'atm',
+            'value' => 'ACB',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('config')->insert([
+            'name' => 'user_atm',
+            'value' => 'MACH VAN HOANG',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('config')->insert([
+            'name' => 'number_atm',
+            'value' => '2038007',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }
