@@ -96,11 +96,17 @@
   z-index: 9;
   border: none;
   border-radius: 3px;
-  width: 50px;
+  width: 100px;
   height: calc(100% - 2px);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#form-search.formOrder .btn-search {
+  position: initial;
+  right: auto;
+  top: auto;
+  height: auto;
 }
 
 .product_image_view .main-view {
@@ -124,4 +130,21 @@ h3.product_name {
 }
 .form-switch.status .status_input {
   padding-left: 2.5rem;
+}
+
+.list-Food {
+  margin: 0px;
+  list-style: none;
+  padding: 0px;
+}
+.list-Food li:not(:last-child) {
+  margin-bottom: 10px;
+}
+.list-Food .product_image_view img {
+  max-width: 100px;
+}
+
+.title-food {
+  font-size: 16px;
+  margin: 0px;
 }/*# sourceMappingURL=base.css.map */

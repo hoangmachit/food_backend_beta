@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\OrderDetail;
 use App\Models\OrderStatus;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class Order extends Model
 {
@@ -19,6 +20,7 @@ class Order extends Model
         'user_name',
         'phone_number',
         'total',
+        'status_payment',
         'payment_id',
         'order_status_id'
     ];

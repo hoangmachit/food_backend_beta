@@ -16,7 +16,7 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
-        $products = Product::all();
+        $products = Product::orderBy('status', 'DESC')->get();
         return view('admin.product.index', [
             'products' => $products
         ]);
@@ -24,6 +24,7 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $data = $request->product;
+        $data['price'] = !empty($data['price']) ? (int)$data['price'] : 0;
         $data['user_id'] = Auth::user()->id;
         $data['status'] = !empty($data['status']) ? (int) $data['status'] : 0;
         $product = Product::create($data);
@@ -43,7 +44,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->name = $data['name'];
         $product->desc = $data['desc'];
-        $product->price = $data['price'];
+        $product->price = !empty($data['price']) ? (int)$data['price'] : 0;
         $product->status = $data['status'];
         if ($request->image) {
             $imageName = $product->id . '.' . $request->image->extension();
@@ -75,7 +76,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $status = $request->status;
-        $product->status = $status;
+        $product->status = (int)$status;
         $product->save();
         return response(true, 200);
     }

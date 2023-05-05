@@ -19,7 +19,9 @@ class OrderController extends Controller
     public function list(Request $request)
     {
         $token_id = $request->token_id;
-        $orders = Order::with('payment', 'order_status', 'order_detail')->whereTokenId($token_id)->orderBy('id', 'DESC')->get();
+        $orders = Order::with(['payment', 'order_status', 'order_detail' => function ($query) {
+            $query->orderBy('price', 'DESC')->orderBy('name', 'ASC');
+        }])->whereTokenId($token_id)->orderBy('id', 'DESC')->limit(10)->get();
         return sendResponse(OrderResource::collection($orders), 'Order success !!!');
     }
     public function create(Request $request)
@@ -50,11 +52,14 @@ class OrderController extends Controller
                             'name' => $product->name,
                             'desc' => $product->desc,
                             'image' => $product->image,
-                            'price' => $product->price,
-                            'quantity' => $item['qty'],
-                            'order_id' => $order->id
+                            'price' =>  (int)$product->price,
+                            'quantity' => (int)$item['qty'],
+                            'order_id' => $order->id,
+                            'product_id' => $product->id
                         ]);
-                        $real_price += $detail->price;
+                        $real_price += (int)$detail->price * (int)$item['qty'];
+                        $product->buy = (int)$product->buy + (int)$item['qty'];
+                        $product->save();
                         unset($detail);
                     }
                     unset($product);

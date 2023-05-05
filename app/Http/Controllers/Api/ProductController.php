@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::all();
+        $products = Product::whereStatus(1)->orderBy('name', 'ASC')->get();
         return response($products, 200);
     }
 }

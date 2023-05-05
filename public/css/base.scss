@@ -99,11 +99,19 @@
         z-index: 9;
         border: none;
         border-radius: 3px;
-        width: 50px;
+        width: 100px;
         height: calc(100% - 2px);
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    &.formOrder{
+        .btn-search{
+            position: initial;
+            right: auto;
+            top: auto;
+            height: auto;
+        }
     }
 }
 
@@ -133,4 +141,22 @@ h3.product_name {
     .status_input {
         padding-left: 2.5rem;
     }
+}
+
+.list-Food{
+    margin: 0px;
+    list-style: none;
+    padding: 0px;
+    li:not(:last-child){
+        margin-bottom: 10px;
+    }
+    .product_image_view{
+        img{
+            max-width: 100px;
+        }
+    }
+}
+.title-food{
+    font-size: 16px;
+    margin: 0px;
 }

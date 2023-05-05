@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\HomeController as HomeAdminController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,14 +19,13 @@ use App\Http\Controllers\Admin\HomeController as HomeAdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    abort(403);
 });
-
-Auth::routes(['register' => false]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+Auth::routes(['register' => false, 'reset' => false]);
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [HomeAdminController::class, 'index'])->name('index');
     Route::prefix('product')->name('product.')->group(function () {

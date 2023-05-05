@@ -10,22 +10,29 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="d-flex justify-content-start align-items-center">
-                                <form action="" id="form-search">
-                                    <div class="input-search">
-                                        <input type="text" class="form-control" name="keyword"
-                                            placeholder="Tìm kiếm đơn hàng" id="keyword">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <form action="" id="form-search" class="formOrder">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="input-search">
+                                            <input type="text" class="form-control" name="keyword"
+                                                placeholder="Tìm kiếm đơn hàng" id="keyword">
+                                        </div>
+                                        <div class="input-search ms-2">
+                                            <input type="date" class="form-control" name="date" placeholder="Date"
+                                                value="{{ $date->format('Y-m-d') }}" id="date">
+                                        </div>
+                                        <button type="submit" class="btn-search ms-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                            </svg>
+                                        </button>
                                     </div>
-                                    <button type="submit" class="btn-search">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                            <path
-                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                        </svg>
-                                    </button>
                                 </form>
-                                <div class="ms-2 bulk-order" data-route="{{ route('admin.order.status') }}" data-redirect="{{ route('admin.order.index') }}">
+                                <div class="ms-2 bulk-order" data-route="{{ route('admin.order.status') }}"
+                                    data-redirect="{{ route('admin.order.index') }}">
                                     <button type="button" name="status" value="1" class="btn btn-danger">
                                         Mới đặt hàng
                                     </button>
@@ -43,31 +50,20 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="add-new">
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCreateProduct">
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                        </svg>
-                                        Add Product
-                                    </span>
-                                </button>
-                            </div>
                         </div>
                         <table class="table table-striped tableOrder">
                             <thead>
                                 <tr>
                                     <th scope="col" width="75">
                                         <div class="form-check">
-                                            <input class="form-check-input form-check-all" type="checkbox" >
+                                            <input class="form-check-input form-check-all" type="checkbox">
                                         </div>
                                     </th>
-                                    <th scope="col">Customer</th>
+                                    <th scope="col" width="200">Customer</th>
                                     <th scope="col" width="150">Phone number</th>
                                     <th scope="col" width="500">Order detail</th>
                                     <th scope="col" width="150">Payment method</th>
+                                    <th scope="col" width="150">Create At</th>
                                     <th scope="col" width="100">Status</th>
                                     <th scope="col" class="text-center" width="100">Action</th>
                                 </tr>
@@ -91,19 +87,22 @@
                                                             <div>
                                                                 Product Name: {{ $order_detail->name }}
                                                             </div>
-                                                            <div>
-                                                                <img src=" {{ $order_detail->image && $order_detail->image != '' ? asset('/uploads/product/' . $order_detail->image) : asset('/image/no-image.gif') }}"
-                                                                    alt="{{ $order_detail->name }}">
-                                                            </div>
-                                                            <div>
-                                                                Qty: {{ $order_detail->quantity }}
-                                                            </div>
+                                                            @if ($order_detail->price > 0)
+                                                                <div>
+                                                                    Qty: {{ $order_detail->quantity }}
+                                                                </div>
+                                                                <div class="product-image">
+                                                                    <img src=" {{ $order_detail->image && $order_detail->image != '' ? asset('/uploads/product/' . $order_detail->image) : asset('/image/no-image.gif') }}"
+                                                                        alt="{{ $order_detail->name }}">
+                                                                </div>
+                                                            @endif
                                                         </li>
                                                     @endforeach
                                                 </ul>
                                             @endif
                                         </td>
                                         <td>{{ $order->payment->name }}</td>
+                                        <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
                                         <td>
                                             @php
                                                 $class = 'bg-danger';

@@ -16,10 +16,13 @@ class Product extends Model
         'price',
         'image',
         'status',
+        'status_payment',
+        'buy',
         'user_id'
     ];
     public function getThumbnailAttribute()
     {
-        return asset('uploads/product/'.$this->image);
+        $image =  $this->image && $this->image != "" ? 'uploads/product/' . $this->image : "/image/no-image.gif";
+        return asset($image);
     }
 }
